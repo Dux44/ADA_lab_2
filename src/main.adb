@@ -8,8 +8,8 @@ with Ada.Numerics.Discrete_Random;
 
 procedure Main is
 
-   NumOfThreads  : constant Integer := 10;
-   NumOfElements : constant Integer := 10000;
+   NumOfThreads  : constant Integer := 50;
+   NumOfElements : constant Integer := 500_000;
 
    Arr : array (1 .. NumOfElements) of Integer;
    type RandRange is range 1 .. NumOfElements;
@@ -34,7 +34,7 @@ procedure Main is
         ("New min set - idx:" & Rand_Idx'Img & " num:" & Arr (Rand_Idx)'Img);
    end Set_Random_Minimum;
 
-   function Part_Sum (Start_Index, Finish_Index : in Integer) return Integer is
+   function Part_Min (Start_Index, Finish_Index : in Integer) return Integer is
       CurrMinIdx : Integer := Start_Index;
    begin
       for I in Start_Index .. Finish_Index loop
@@ -43,7 +43,7 @@ procedure Main is
          end if;
       end loop;
       return CurrMinIdx;
-   end Part_Sum;
+   end Part_Min;
 
    protected UpdateHandler is
       procedure SetMinIdx (FoundMinIdx : in Integer);
@@ -82,7 +82,7 @@ procedure Main is
          Seeker.Finish_Index := Finish_Index;
       end Start;
       FoundMinIdx :=
-        Part_Sum (Start_Index => Start_Index, Finish_Index => Finish_Index);
+        Part_Min (Start_Index => Start_Index, Finish_Index => Finish_Index);
       UpdateHandler.SetMinIdx (FoundMinIdx);
    end Seeker;
 
