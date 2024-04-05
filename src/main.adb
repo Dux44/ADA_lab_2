@@ -88,7 +88,7 @@ procedure Main is
 
    type SeekerArr is array (Integer range <>) of Seeker;
 
-   procedure Parallel_Sum is
+   procedure Parallel_Min is
       Step         : Integer := Arr'Length / NumOfThreads;
       Threads      : SeekerArr (1 .. NumOfThreads);
       Boundary     : Integer := Arr'First;
@@ -104,11 +104,11 @@ procedure Main is
 
       Put_Line ("Minimal element in array - " & Arr (ResultMinIdx)'Img);
       Put_Line ("Index of minimal element in array - " & ResultMinIdx'Img);
-   end Parallel_Sum;
+   end Parallel_Min;
 
 begin
    Init_Arr;
    Set_Random_Minimum;
-   Parallel_Sum;
+   Parallel_Min;
 end Main;
 
